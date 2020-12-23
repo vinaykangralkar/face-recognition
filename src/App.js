@@ -27,24 +27,26 @@ const app = new Clarifai.App({
   apiKey: 'bd1b81550e2b4a54b7e8d2707e385e8d'
  });
 
+const initialState = {
+    input: '',
+    imageURL: '',
+    box: {},
+    route: 'signin',
+    isSignedIn: false,
+    user: {
+      id: '',
+      name: '',
+      email: '',
+      entries: 0,
+      joined: ''
+    }
+}
+
 class App extends Component {
 
   constructor(){
     super();
-    this.state = {
-      input: '',
-      imageURL: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-      }
-    }
+    this.state = initialState;
   }
 
   loadUser = (user) => {
@@ -85,7 +87,7 @@ class App extends Component {
     app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
     .then(response => {
       if(response){
-        fetch('http://localhost:3000/image', {
+        fetch('https://still-mesa-37379.herokuapp.com/image', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -104,7 +106,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if(route === 'signout'){
-      this.setState({isSignedIn: false})
+      this.setState(initialState)
     }else if(route === 'home'){
       this.setState({isSignedIn: true})
     }

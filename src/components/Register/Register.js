@@ -24,7 +24,7 @@ class Register extends Component {
   }
 
   onSubmitSignIn = () => {
-    fetch('http://localhost:3000/register', {
+    fetch('https://still-mesa-37379.herokuapp.com/register', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -35,7 +35,7 @@ class Register extends Component {
     })
     .then(response => response.json())
     .then(user => {
-      if(user){
+      if(user.id){
         this.props.loadUser(user);
         this.props.onRouteChange('home')
       }
