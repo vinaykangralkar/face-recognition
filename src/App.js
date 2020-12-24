@@ -8,7 +8,6 @@ import Register from './components/Register/Register';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Particles from 'react-particles-js';
 import './App.css';
-import Clarifai from 'clarifai';
 
 const particleOptions = {
   
@@ -22,10 +21,6 @@ const particleOptions = {
       }
     }
 }
-
-const app = new Clarifai.App({
-  apiKey: 'bd1b81550e2b4a54b7e8d2707e385e8d'
- });
 
 const initialState = {
     input: '',
@@ -83,8 +78,14 @@ class App extends Component {
 
   onButtonClick = () => {
     this.setState({imageURL: this.state.input});
-
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+    fetch('https://still-mesa-37379.herokuapp.com/imageurl', {
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            input: this.state.input
+          })
+        })
+    .then(response => response.json())
     .then(response => {
       if(response){
         fetch('https://still-mesa-37379.herokuapp.com/image', {
@@ -96,8 +97,9 @@ class App extends Component {
         })
         .then(response => response.json())
         .then(count => {
-          this.setState(Object.assign(this.state.user, {entries: count}))
+          this.setState(Object.assign(this.state.user, {entries: count})) 
         })
+        .catch(console.log)
       }
       this.displayBox(this.calculateFaceLocation(response))
     })
