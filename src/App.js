@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
+import Clarifai from 'clarifai';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Navigation from './components/Navigation/Navigation';
 import Signin from './components/Signin/Signin';
@@ -9,8 +10,12 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import './App.css';
 
+//You must add your own API key here from Clarifai.
+const app = new Clarifai.App({
+ apiKey: 'bd1b81550e2b4a54b7e8d2707e385e8d'
+});
+
 const particlesOptions = {
-  //customize this to your liking
   particles: {
     number: {
       value: 30,
@@ -22,25 +27,23 @@ const particlesOptions = {
   }
 }
 
-const initialState = {
-  input: '',
-  imageUrl: '',
-  box: {},
-  route: 'signin',
-  isSignedIn: false,
-  user: {
-    id: '',
-    name: '',
-    email: '',
-    entries: 0,
-    joined: ''
-  }
-}
-
 class App extends Component {
   constructor() {
     super();
-    this.state = initialState;
+    this.state = {
+      input: '',
+      imageUrl: '',
+      box: {},
+      route: 'signin',
+      isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      }
+    }
   }
 
   loadUser = (data) => {
@@ -76,17 +79,23 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
-      fetch('https://evening-mountain-92479.herokuapp.com/imageurl', {
-        method: 'post',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          input: this.state.input
-        })
-      })
-      .then(response => response.json())
+    app.models
+      .predict(
+        // HEADS UP! Sometimes the Clarifai Models can be down or not working as they are constantly getting updated.
+        // A good way to check if the model you are using is up, is to check them on the clarifai website. For example,
+        // for the Face Detect Mode: https://www.clarifai.com/models/face-detection
+        // If that isn't working, then that means you will have to wait until their servers are back up. Another solution
+        // is to use a different version of their model that works like: `c0c0ac362b03416da06ab3fa36fb58e3`
+        // so you would change from:
+        // .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+        // to:
+        // .predict('c0c0ac362b03416da06ab3fa36fb58e3', this.state.input)
+        Clarifai.FACE_DETECT_MODEL,
+        this.state.input)
       .then(response => {
+        console.log('hi', response)
         if (response) {
-          fetch('https://evening-mountain-92479.herokuapp.com/image', {
+          fetch('http://localhost:3000/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -97,7 +106,6 @@ class App extends Component {
             .then(count => {
               this.setState(Object.assign(this.state.user, { entries: count}))
             })
-            .catch(console.log)
 
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
@@ -107,7 +115,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState(initialState)
+      this.setState({isSignedIn: false})
     } else if (route === 'home') {
       this.setState({isSignedIn: true})
     }
