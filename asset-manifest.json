@@ -1,25 +1,23 @@
 {
   "files": {
-    "main.css": "/face-recognition/static/css/main.c7b08b49.chunk.css",
-    "main.js": "/face-recognition/static/js/main.4ce386ca.chunk.js",
-    "main.js.map": "/face-recognition/static/js/main.4ce386ca.chunk.js.map",
-    "runtime-main.js": "/face-recognition/static/js/runtime-main.f64fd39d.js",
-    "runtime-main.js.map": "/face-recognition/static/js/runtime-main.f64fd39d.js.map",
+    "main.css": "/face-recognition/static/css/main.f9ea0915.chunk.css",
+    "main.js": "/face-recognition/static/js/main.8ca7945f.chunk.js",
+    "main.js.map": "/face-recognition/static/js/main.8ca7945f.chunk.js.map",
+    "runtime-main.js": "/face-recognition/static/js/runtime-main.eca56773.js",
+    "runtime-main.js.map": "/face-recognition/static/js/runtime-main.eca56773.js.map",
     "static/css/2.31461e4f.chunk.css": "/face-recognition/static/css/2.31461e4f.chunk.css",
-    "static/js/2.90328cb2.chunk.js": "/face-recognition/static/js/2.90328cb2.chunk.js",
-    "static/js/2.90328cb2.chunk.js.map": "/face-recognition/static/js/2.90328cb2.chunk.js.map",
-    "static/js/3.be96e2dd.chunk.js": "/face-recognition/static/js/3.be96e2dd.chunk.js",
-    "static/js/3.be96e2dd.chunk.js.map": "/face-recognition/static/js/3.be96e2dd.chunk.js.map",
+    "static/js/2.80ce80f8.chunk.js": "/face-recognition/static/js/2.80ce80f8.chunk.js",
+    "static/js/2.80ce80f8.chunk.js.map": "/face-recognition/static/js/2.80ce80f8.chunk.js.map",
     "index.html": "/face-recognition/index.html",
     "static/css/2.31461e4f.chunk.css.map": "/face-recognition/static/css/2.31461e4f.chunk.css.map",
-    "static/css/main.c7b08b49.chunk.css.map": "/face-recognition/static/css/main.c7b08b49.chunk.css.map",
-    "static/js/2.90328cb2.chunk.js.LICENSE.txt": "/face-recognition/static/js/2.90328cb2.chunk.js.LICENSE.txt"
+    "static/css/main.f9ea0915.chunk.css.map": "/face-recognition/static/css/main.f9ea0915.chunk.css.map",
+    "static/js/2.80ce80f8.chunk.js.LICENSE.txt": "/face-recognition/static/js/2.80ce80f8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.f64fd39d.js",
+    "static/js/runtime-main.eca56773.js",
     "static/css/2.31461e4f.chunk.css",
-    "static/js/2.90328cb2.chunk.js",
-    "static/css/main.c7b08b49.chunk.css",
-    "static/js/main.4ce386ca.chunk.js"
+    "static/js/2.80ce80f8.chunk.js",
+    "static/css/main.f9ea0915.chunk.css",
+    "static/js/main.8ca7945f.chunk.js"
   ]
 }
